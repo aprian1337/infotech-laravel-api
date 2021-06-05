@@ -19,6 +19,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name',
+        'role',
         'email',
         'password',
     ];
@@ -32,6 +33,14 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token',
     ];
+
+    public function userSewa(){
+        return $this->hasMany('App\Models\UserSewa');
+    }
+
+    public function role(){
+        return $this->hasOne('App\Models\Roles');
+    }
 
     /**
      * The attributes that should be cast to native types.

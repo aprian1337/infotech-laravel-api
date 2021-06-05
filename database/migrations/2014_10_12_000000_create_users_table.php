@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('roles')->references('id')
+            $table->foreignId('role')->references('id')
                 ->on('roles')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

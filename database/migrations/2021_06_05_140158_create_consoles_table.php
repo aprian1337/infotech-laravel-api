@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateConsolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,21 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('sewa_status', function (Blueprint $table) {
             $table->id();
-            $table->String('role', 20);
+            $table->String('status', 20);
             $table->timestamps();
         });
 
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('consoles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('roles')->references('id')
-                ->on('roles')
+            $table->String('merek', 50);
+            $table->String('type' . 20);
+            $table->foreignId('isSewa')->references('id')
+                ->on('sewa_status')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->text('descripsion')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -40,7 +40,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('sewa_status');
+        Schema::dropIfExists('consoles');
     }
 }
